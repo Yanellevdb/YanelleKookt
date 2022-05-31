@@ -28,6 +28,14 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/text_view_dishtype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dishtype"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <TextView
             android:id="@+id/text_view_likes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

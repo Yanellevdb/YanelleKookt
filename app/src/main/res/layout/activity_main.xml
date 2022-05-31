@@ -6,10 +6,27 @@
     android:layout_height="match_parent"
     tools:context="com.example.myapplicationtest.MainActivity">
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="693dp"
+        android:layout_marginTop="100px"
         android:background="@android:color/darker_gray" />
+
+    <EditText
+        android:id="@+id/queryInputText"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="2dp" />
+
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="85dp"
+        android:layout_height="38dp"
+        android:layout_alignEnd="@id/queryInputText"
+        android:text="search" />
+
 
 </RelativeLayout>

@@ -3,11 +3,13 @@ package com.example.myapplicationtest;
 public class ExampleItem {
     private String mImageUrl;
     private String mCreator;
+    private String mDishType;
     private int mLikes;
 
-    public ExampleItem(String imageUrl, String creator, int likes) {
+    public ExampleItem(String imageUrl, String creator, String dishType, int likes) {
         mImageUrl = imageUrl;
         mCreator = creator;
+        mDishType= dishType;
         mLikes = likes;
     }
 
@@ -17,6 +19,10 @@ public class ExampleItem {
     }
 
     public String getCreator() {
+        return mCreator;
+    }
+
+    public String getDishtype() {
         return mCreator;
     }
 
