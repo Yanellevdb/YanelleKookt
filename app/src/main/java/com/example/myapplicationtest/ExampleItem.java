@@ -6,14 +6,15 @@ public class ExampleItem {
     private String mImageUrl;
     private String mCreator;
     private int mLikes;
+    private String mIngredients;
    // private JSONObject mIngredient;
   //  private JSONObject mBereidingUrl;
 
-    public ExampleItem(String imageUrl, String creator, int likes) {
+    public ExampleItem(String imageUrl, String creator, int likes, String ingredients) {
         mImageUrl = imageUrl;
         mCreator = creator;
         mLikes = likes;
-        //mIngredient= ingredient;
+        mIngredients= ingredients;
        // mBereidingUrl= bereiding;
     }
 
@@ -30,9 +31,9 @@ public class ExampleItem {
         return mLikes;
     }
 
-   /* public JSONObject getIngredients() {
-        return mIngredient;
-    }*/
+    public String getIngredients() {
+        return mIngredients;
+    }
 
    /* public JSONObject getBereiding() {
         return mBereidingUrl;

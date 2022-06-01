@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
     public static final String EXTRA_URL= "imageUrl";
     public static final String EXTRA_CREATOR= "creatorName";
     public static final String EXTRA_LIKES= "likeCount";
-    //public static final String EXTRA_INGREDIENTS= "ingredients";
+    public static final String EXTRA_INGREDIENTS= "ingredients";
    // public static final String EXTRA_BEREIDING= "bereidingsUrl";
 
     private RecyclerView mRecyclerView;
@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
                 parseJSON(query);
             }
         });
+
+
     }
 
     private void parseJSON(String query){
@@ -88,10 +90,10 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
                         String creatorName= recipe.getString("label");
                         String imageUrl= recipe.getString("image");
                         int likeCount= recipe.getInt("calories");
-                        //JSONArray ingredients= recipe.getJSONArray("ingredients");
+                        String ingredients= recipe.getString("ingredientLines");
                         //JSONObject bereidingUrl= recipe.getJSONObject("totalNutrients");
 
-                        mExampleList.add(new ExampleItem(imageUrl, creatorName, likeCount)); //hier voegen we het toe aan de lijst
+                        mExampleList.add(new ExampleItem(imageUrl, creatorName, likeCount, ingredients)); //hier voegen we het toe aan de lijst
                     }
 
                     mExampleAdapter= new ExampleAdapter(MainActivity.this, mExampleList); //we geven het door aan de adapter
@@ -126,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
         detailIntent.putExtra(EXTRA_URL, clickedItem.getImageUrl());
         detailIntent.putExtra(EXTRA_CREATOR, clickedItem.getCreator());
         detailIntent.putExtra(EXTRA_LIKES, clickedItem.getLikeCount());
-      //  detailIntent.putExtra(EXTRA_INGREDIENTS, (Parcelable) clickedItem.getIngredients());
+        detailIntent.putExtra(EXTRA_INGREDIENTS, clickedItem.getIngredients());
        // detailIntent.putExtra(EXTRA_BEREIDING, (Parcelable) clickedItem.getBereiding());
 
         startActivity(detailIntent);

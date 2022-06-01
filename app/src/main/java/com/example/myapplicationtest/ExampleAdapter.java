@@ -20,6 +20,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     private Context mContext;
     private ArrayList<ExampleItem> mExampleList;
     private OnItemClickListener mListener;
+    private Object ArrayList;
 
     public interface  OnItemClickListener{
         void onItemClick(int position);
