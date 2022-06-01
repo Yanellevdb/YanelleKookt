@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Button;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -54,24 +54,89 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
         mExampleList= new ArrayList<>();
         mExampleAdapter= new ExampleAdapter(MainActivity.this, mExampleList);
         mRecyclerView.setAdapter(mExampleAdapter);
+        mExampleList.clear();
 
         mRequestQueue= Volley.newRequestQueue(this);
-        parseJSON(DEFAULT_QUERY);
+        parseJSON(DEFAULT_QUERY, "");
+
+        getSupportActionBar().setTitle("Yanelle kookt");
+
+        //filters
+        Button sortLowFat= findViewById(R.id.lowFat);
+        sortLowFat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String query= "e";
+                String sortAll="&diet=low-fat";
+                parseJSON(query, sortAll);
+            }
+        });
+
+        Button sortLowCarb= findViewById(R.id.lowCarb);
+        sortLowCarb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String query= "e";
+                String sortAll="&diet=low-carb";
+                parseJSON(query, sortAll);
+            }
+        });
+
+        Button sortHighProtein= findViewById(R.id.highProtein);
+        sortHighProtein.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String query= "e";
+                String sortAll="&diet=high-protein";
+                parseJSON(query, sortAll);
+            }
+        });
+
+        Button sortHighFiber= findViewById(R.id.highFiber);
+        sortHighFiber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String query= "a";
+                String sortAll="&diet=high-fiber";
+                parseJSON(query, sortAll);
+            }
+        });
+
+        Button sortBalanced= findViewById(R.id.balanced);
+        sortBalanced.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String query= "e";
+                String sortAll="&diet=balanced";
+                parseJSON(query, sortAll);
+            }
+        });
+
+        Button sortAll= findViewById(R.id.sortAll);
+        sortAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String query= "all";
+                String sortAll="";
+                parseJSON(query, sortAll);
+            }
+        });
+
 
         findViewById(R.id.searchButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String query= mEdit.getText().toString();
                 if(query.isEmpty()) return;
-                parseJSON(query);
+                parseJSON(query, "");
             }
         });
 
 
     }
 
-    private void parseJSON(String query){
-        String url="https://api.edamam.com/api/recipes/v2?type=public&q=" + query +"&app_id=8faf6fa5&app_key=97f92e2c74c48a27e066bcc515e951b0";
+    private void parseJSON(String query, String query2){
+        String url="https://api.edamam.com/api/recipes/v2?type=public&q=" + query +"&app_id=8faf6fa5&app_key=97f92e2c74c48a27e066bcc515e951b0" + query2;
 
         mExampleList.clear();
 
@@ -91,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
                         String imageUrl= recipe.getString("image");
                         int likeCount= recipe.getInt("calories");
                         String ingredients= recipe.getString("ingredientLines");
+                        String diet= recipe.getString("dietLabels");
                         //JSONObject bereidingUrl= recipe.getJSONObject("totalNutrients");
 
                         mExampleList.add(new ExampleItem(imageUrl, creatorName, likeCount, ingredients)); //hier voegen we het toe aan de lijst

@@ -6,13 +6,16 @@ import static com.example.myapplicationtest.MainActivity.EXTRA_INGREDIENTS;
 import static com.example.myapplicationtest.MainActivity.EXTRA_LIKES;
 import static com.example.myapplicationtest.MainActivity.EXTRA_URL;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.speech.tts.TextToSpeech;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,8 +28,19 @@ import java.util.Locale;
 
 public class DetailActivity extends AppCompatActivity {
 
-    Button btnSpeak;
-    TextToSpeech textToSpeech;
+    private Button mBtnSpeak;
+    private EditText mTextEnter;
+    private TextToSpeech mTextToSpeech;
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +53,28 @@ public class DetailActivity extends AppCompatActivity {
         int likeCount= intent.getIntExtra(EXTRA_LIKES, 0);
 
         String ingredients= intent.getStringExtra(EXTRA_INGREDIENTS);
-        String[] splicedIngredient= ingredients.replaceAll("]", " ").replaceAll("\"", " ").replaceAll("\\[", " ").split(",");
+        String[] splicedIngredient= ingredients.replaceAll("]", " ").replaceAll("\"", " ").replaceAll("\\[", " ").replaceAll("\"", "\n").split(",");
        // String bereiding= intent.getStringExtra(EXTRA_BEREIDING);
+
+        getSupportActionBar().setTitle("Go back");
+
+        ActionBar actionBar= getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         ImageView imageView= findViewById(R.id.image_view_detail);
         TextView textViewCreator= findViewById(R.id.text_view_creator_detail);
         TextView textViewLikes= findViewById(R.id.text_view_like_detail);
         Button share= findViewById(R.id.shareButton);
         Button btnSpeak=findViewById(R.id.speakButton);
+
+        mTextToSpeech= new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+                if(i == TextToSpeech.SUCCESS){
+                    int result= mTextToSpeech.setLanguage(Locale.ENGLISH);
+                }
+            }
+        });
 
          TextView textViewIngredient= findViewById(R.id.text_view_ingredients_detail);
        // TextView textViewBereidingUrl= findViewById(R.id.text_view_bereiding_detail);
@@ -73,20 +101,11 @@ public class DetailActivity extends AppCompatActivity {
         });
 
 
-        textToSpeech= new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int i) {
-                if(i==TextToSpeech.SUCCESS){
-                    int language= textToSpeech.setLanguage(Locale.ENGLISH);
-                }
-            }
-        });
-
         btnSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String s= textViewCreator.getText().toString();
-                int speech= textToSpeech.speak(s, textToSpeech.QUEUE_FLUSH, null);
+                int speech= mTextToSpeech.speak(s, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
     }

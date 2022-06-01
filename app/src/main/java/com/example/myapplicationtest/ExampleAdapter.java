@@ -22,6 +22,12 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     private OnItemClickListener mListener;
     private Object ArrayList;
 
+    //niet zeker
+    public void filterList(ArrayList<ExampleItem> filteredList){
+        ArrayList= filteredList;
+        notifyDataSetChanged();
+    }
+
     public interface  OnItemClickListener{
         void onItemClick(int position);
     }
