@@ -4,42 +4,105 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     android:orientation="vertical"
     tools:context="com.example.myapplicationtest.DetailActivity">
 
-    <ImageView
-        android:id="@+id/image_view_detail"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:src="@mipmap/ic_launcher" />
+    <Button
+        android:id="@+id/shareButton"
+        android:layout_width="133dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="20dp"
+        android:inputType="text"
+        android:padding="4dp"
+        android:text="Share"
+        android:textSize="18sp"
+        />
 
     <TextView
         android:id="@+id/text_view_creator_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
         android:text="Creator Name"
-        android:textColor="@android:color/black"
-        android:textSize="40sp" />
-
-    <TextView
-        android:id="@+id/text_view_dishtype_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:text="Dishtype"
-        android:textColor="@android:color/black"
-        android:textSize="25sp" />
+        android:textColor="@android:color/white"
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/text_view_like_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:text="Likes: "
-        android:textSize="30sp" />
+        android:layout_marginEnd="16dp"
+        android:text="Dishtype"
+        android:textColor="@android:color/white"
+        android:textSize="22sp"
+        />
+
+    <ImageView
+        android:id="@+id/image_view_detail"
+        android:layout_width="match_parent"
+        android:layout_height="368dp"
+        android:layout_margin="20dp"
+        android:src="@mipmap/ic_launcher"
+        android:textAlignment="center" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/border_shadow"
+        android:layout_margin="15dp"
+        >
+
+
+        <TextView
+            android:id="@+id/text_view_ingredientsTitel_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Ingrediënten"
+            android:textSize="22sp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:id="@+id/text_view_ingredients_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Calorieën: "
+            android:textSize="18sp"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/text_view_BereidingTitel_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="20dp"
+            android:text="Bereidingswijze"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/text_view_bereiding_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="18dp"
+            android:text="Calorieën: "
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="20dp"/>
+
+    </LinearLayout>
 
 </LinearLayout>

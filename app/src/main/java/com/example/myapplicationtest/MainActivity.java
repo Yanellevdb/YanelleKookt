@@ -25,7 +25,6 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements ExampleAdapter.OnItemClickListener {
     public static final String EXTRA_URL= "imageUrl";
     public static final String EXTRA_CREATOR= "creatorName";
-    public static final String EXTRA_DISHTYPE="dishType";
     public static final String EXTRA_LIKES= "likeCount";
 
     private RecyclerView mRecyclerView;
@@ -85,15 +84,14 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
 
                         String creatorName= recipe.getString("label");
                         String imageUrl= recipe.getString("image");
-                        String dishType= recipe.getString("dishType");
                         int likeCount= recipe.getInt("calories");
 
-                        mExampleList.add(new ExampleItem(imageUrl, creatorName, dishType, likeCount)); //hier voegen we het toe aan de lijst
+                        mExampleList.add(new ExampleItem(imageUrl, creatorName, likeCount)); //hier voegen we het toe aan de lijst
                     }
 
-                   // mExampleAdapter= new ExampleAdapter(MainActivity.this, mExampleList); //we geven het door aan de adapter
-                  //  mRecyclerView.setAdapter(mExampleAdapter); //we koppelen de adapter aan de recycleview
-                  //  mExampleAdapter.setOnItemClickListener(MainActivity.this);
+                    mExampleAdapter= new ExampleAdapter(MainActivity.this, mExampleList); //we geven het door aan de adapter
+                    mRecyclerView.setAdapter(mExampleAdapter); //we koppelen de adapter aan de recycleview
+                    mExampleAdapter.setOnItemClickListener(MainActivity.this);
 
                     mExampleAdapter.notifyDataSetChanged();
 
@@ -112,6 +110,9 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
         mRequestQueue.add(request);
     }
 
+    //hier gaan we een onclick uitvoeren, die gelinkt wordt met die van de adapter
+    //ze geven eigenlijk de 'positie' door en dit zegt eigenlijk op welk item er werd geklikt
+    //via detailIntent gaan we de info doorspelen naar de detailpagina
     @Override
     public void onItemClick(int position) {
         Intent detailIntent= new Intent(this, DetailActivity.class);
