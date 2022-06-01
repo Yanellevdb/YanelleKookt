@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Dishtype"
+        android:text="Calorieën: "
         android:textColor="@android:color/white"
         android:textSize="22sp"
         />
@@ -45,18 +45,19 @@
     <ImageView
         android:id="@+id/image_view_detail"
         android:layout_width="match_parent"
-        android:layout_height="368dp"
+        android:layout_height="240dp"
         android:layout_margin="20dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher"
         android:textAlignment="center" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="272dp"
+        android:layout_marginHorizontal="20dp"
         android:background="@drawable/border_shadow"
-        android:layout_margin="15dp"
-        >
+        android:orientation="vertical">
 
 
         <TextView
@@ -64,12 +65,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             android:text="Ingrediënten"
-            android:textSize="22sp"
-            android:layout_marginTop="20dp"
             android:textColor="@color/black"
-            />
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/text_view_ingredients_detail"
@@ -78,30 +78,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:text="Calorieën: "
-            android:textSize="18sp"
-            android:textColor="@android:color/black"/>
-
-        <TextView
-            android:id="@+id/text_view_BereidingTitel_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="20dp"
-            android:text="Bereidingswijze"
-            android:textColor="@color/black"
-            android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/text_view_bereiding_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="18dp"
-            android:text="Calorieën: "
-            android:textSize="16sp"
             android:textColor="@android:color/black"
-            android:layout_marginBottom="20dp"/>
+            android:textSize="18sp" />
 
     </LinearLayout>
 

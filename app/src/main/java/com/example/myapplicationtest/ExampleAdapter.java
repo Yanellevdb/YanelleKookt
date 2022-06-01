@@ -11,6 +11,9 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleViewHolder> {
@@ -45,9 +48,14 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         String imageUrl= currentItem.getImageUrl();
         String creatorName= currentItem.getCreator();
         int likeCount= currentItem.getLikeCount();
+      //  JSONObject ingredient= currentItem.getIngredients();
+      //  JSONObject bereidingsUrl= currentItem.getBereiding();
 
         holder.mTextViewCreator.setText(creatorName);
-        holder.mTextViewLikes.setText("Likes: " + likeCount);
+        holder.mTextViewLikes.setText("Calorieën: " + likeCount);
+      //  holder.mTextViewIngredient.setText((CharSequence) ingredient);
+      //  holder.mTextViewBereiding.setText((CharSequence) bereidingsUrl);
+
         Picasso.with(mContext).load(imageUrl).fit().centerInside().into(holder.mImageView);
     }
 
@@ -60,12 +68,16 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         public ImageView mImageView;
         public TextView mTextViewCreator;
         public TextView mTextViewLikes;
+      //  public TextView mTextViewIngredient;
+      //  public TextView mTextViewBereiding;
 
         public ExampleViewHolder(View itemView) {
             super(itemView);
             mImageView = itemView.findViewById(R.id.image_view);
             mTextViewCreator = itemView.findViewById(R.id.text_view_creator);
             mTextViewLikes = itemView.findViewById(R.id.text_view_likes);
+        //    mTextViewIngredient= itemView.findViewById(R.id.text_view_ingredients_detail);
+        //    mTextViewBereiding= itemView.findViewById(R.id.text_view_bereiding_detail);
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override

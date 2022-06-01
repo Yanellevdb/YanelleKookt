@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.EditText;
 
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
     public static final String EXTRA_URL= "imageUrl";
     public static final String EXTRA_CREATOR= "creatorName";
     public static final String EXTRA_LIKES= "likeCount";
+    //public static final String EXTRA_INGREDIENTS= "ingredients";
+   // public static final String EXTRA_BEREIDING= "bereidingsUrl";
 
     private RecyclerView mRecyclerView;
     private ExampleAdapter mExampleAdapter;
@@ -85,6 +88,8 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
                         String creatorName= recipe.getString("label");
                         String imageUrl= recipe.getString("image");
                         int likeCount= recipe.getInt("calories");
+                        //JSONArray ingredients= recipe.getJSONArray("ingredients");
+                        //JSONObject bereidingUrl= recipe.getJSONObject("totalNutrients");
 
                         mExampleList.add(new ExampleItem(imageUrl, creatorName, likeCount)); //hier voegen we het toe aan de lijst
                     }
@@ -121,6 +126,8 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
         detailIntent.putExtra(EXTRA_URL, clickedItem.getImageUrl());
         detailIntent.putExtra(EXTRA_CREATOR, clickedItem.getCreator());
         detailIntent.putExtra(EXTRA_LIKES, clickedItem.getLikeCount());
+      //  detailIntent.putExtra(EXTRA_INGREDIENTS, (Parcelable) clickedItem.getIngredients());
+       // detailIntent.putExtra(EXTRA_BEREIDING, (Parcelable) clickedItem.getBereiding());
 
         startActivity(detailIntent);
     }
