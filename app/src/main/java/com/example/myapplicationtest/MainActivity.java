@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
     public static final String EXTRA_GERECHT= "gerechtName";
     public static final String EXTRA_CALORIEEN= "calorieCount";
     public static final String EXTRA_INGREDIENTS= "ingredients";
-    // public static final String EXTRA_BEREIDING= "bereidingsUrl";
 
     private RecyclerView mRecyclerView;
     private ExampleAdapter mExampleAdapter;
@@ -38,14 +37,12 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
     private EditText mEdit;
     private static String DEFAULT_QUERY= "chicken";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mEdit= findViewById(R.id.queryInputText);
-        mEdit.setText(DEFAULT_QUERY);
+        getSupportActionBar().setTitle("Yanelle kookt");
 
         mRecyclerView= findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -54,12 +51,22 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
         mExampleList= new ArrayList<>();
         mExampleAdapter= new ExampleAdapter(MainActivity.this, mExampleList);
         mRecyclerView.setAdapter(mExampleAdapter);
-        mExampleList.clear();
+
+        mEdit= findViewById(R.id.queryInputText);
+        mEdit.setText(DEFAULT_QUERY);
 
         mRequestQueue= Volley.newRequestQueue(this);
         parseJSON(DEFAULT_QUERY, "");
 
-        getSupportActionBar().setTitle("Yanelle kookt");
+        //zoekfunctie
+        findViewById(R.id.searchButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String query= mEdit.getText().toString();
+                if(query.isEmpty()) return;
+                parseJSON(query, "");
+            }
+        });
 
         //location
         Button locationBtn= findViewById(R.id.locationBtn);
@@ -130,16 +137,6 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
                 String query= "all";
                 String sortAll="";
                 parseJSON(query, sortAll);
-            }
-        });
-
-
-        findViewById(R.id.searchButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String query= mEdit.getText().toString();
-                if(query.isEmpty()) return;
-                parseJSON(query, "");
             }
         });
 

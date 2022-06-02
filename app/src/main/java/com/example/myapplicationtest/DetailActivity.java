@@ -1,6 +1,5 @@
 package com.example.myapplicationtest;
 
-//import static com.example.myapplicationtest.MainActivity.EXTRA_BEREIDING;
 import static com.example.myapplicationtest.MainActivity.EXTRA_GERECHT;
 import static com.example.myapplicationtest.MainActivity.EXTRA_INGREDIENTS;
 import static com.example.myapplicationtest.MainActivity.EXTRA_CALORIEEN;
@@ -18,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -29,7 +29,6 @@ import java.util.Locale;
 public class DetailActivity extends AppCompatActivity {
 
     TextToSpeech t1;
-    EditText ed1;
     Button b1;
 
     @Override
@@ -48,7 +47,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
 //        ed1=(EditText)findViewById(R.id.editText);
-   //     b1=(Button)findViewById(R.id.speakButton);
+        b1=(Button)findViewById(R.id.speechButton);
 
         Intent intent= getIntent();
         String imageUrl= intent.getStringExtra(EXTRA_URL);
@@ -67,13 +66,20 @@ public class DetailActivity extends AppCompatActivity {
         TextView textViewGerecht= findViewById(R.id.text_view_gerecht_detail);
         TextView textViewCalorieen= findViewById(R.id.text_view_calorieen_detail);
         Button share= findViewById(R.id.shareButton);
-      //  Button btnSpeak=findViewById(R.id.speakButton);
 
-       /* t1= new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+        b1=findViewById(R.id.speechButton);
+
+        t1= new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
-                if(status != TextToSpeech.ERROR){
-                    t1.setLanguage(Locale.UK);
+                if(status == TextToSpeech.SUCCESS){
+                    int lang= t1.setLanguage(Locale.US);
+
+                    if (lang == TextToSpeech.LANG_MISSING_DATA || lang == TextToSpeech.LANG_NOT_SUPPORTED){
+                        Toast.makeText(DetailActivity.this, "Language not supported", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(DetailActivity.this, "Language supported", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -81,13 +87,12 @@ public class DetailActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String toSpeak= textViewGerecht.getText().toString();
-                int speech= t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+                String data= textViewGerecht.getText().toString();
+                t1.speak(data, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
-*/
+
         TextView textViewIngredient= findViewById(R.id.text_view_ingredients_detail);
-        // TextView textViewBereidingUrl= findViewById(R.id.text_view_bereiding_detail);
 
         Picasso.with(this).load(imageUrl).fit().centerInside().into(imageView);
         textViewGerecht.setText(gerechtName);
