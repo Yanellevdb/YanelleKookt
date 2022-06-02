@@ -13,6 +13,6 @@
     <color name="blue">#683df5</color>
 
     <color name="details">#ccffffff</color>
-    <color name="detailsLight">#1affffff</color>
+    <color name="detailsLight">#3EFFFFFF</color>
     <color name="detailsMedium">#66ffffff</color>
 </resources>

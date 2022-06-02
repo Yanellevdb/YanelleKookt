@@ -11,42 +11,41 @@
         <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp">
+        android:layout_marginHorizontal="10dp"
+            android:layout_gravity="center_vertical">
 
-        <EditText
-            android:id="@+id/queryInputText"
-            android:layout_width="245dp"
-            android:layout_height="66dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginHorizontal="5dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/border_shadow"
-            android:backgroundTint="@color/detailsMedium"
-            android:inputType="text"
-            android:paddingLeft="15dp"
-            android:text="Zoek recepten"
-            android:textSize="20sp" />
+            <EditText
+                android:id="@+id/queryInputText"
+                android:layout_width="219dp"
+                android:layout_height="55dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/border_shadow"
+                android:backgroundTint="@color/detailsLight"
+                android:inputType="text"
+                android:paddingLeft="10dp"
+                android:text="Zoek recepten"
+                android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/searchButton"
-            style="@style/Widget.MaterialComponents.Button.Icon"
-            android:layout_width="125dp"
-            android:layout_height="66dp"
-            android:layout_alignEnd="@id/queryInputText"
-            android:layout_centerHorizontal="true"
-            android:layout_marginHorizontal="5dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/blue"
-            android:padding="5dp"
-            android:text="Zoek"
-            android:textColor="#ffffff"
-            android:textColorHighlight="@color/primary"
-            android:textColorHint="@color/primary"
-            android:textColorLink="@color/colorAccent"
-            android:textSize="20sp"
-            app:icon="@android:drawable/ic_menu_search"
-            app:iconTint="@color/primaryLight" />
+            <Button
+                android:id="@+id/searchButton"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="135dp"
+                android:layout_height="55dp"
+                android:layout_alignEnd="@id/queryInputText"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/blue"
+                android:padding="2dp"
+                android:text="Zoek"
+                android:textColor="#ffffff"
+                android:textColorHighlight="@color/primary"
+                android:textSize="20sp"
+                app:cornerRadius="10px"
+                app:icon="@android:drawable/ic_menu_search"
+                app:iconTint="@color/primaryLight" />
 
     </LinearLayout>
 
@@ -56,87 +55,95 @@
         android:text="Choose your diet:"
         android:textSize="15dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="18dp"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/sortAll"
-            android:layout_width="0dp"
+        <HorizontalScrollView
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:id="@+id/horizontalScroll">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp">
+
+            <Button
+            android:id="@+id/sortAll"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
             android:layout_weight= "1"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="2dp"
             android:layout_marginEnd="5dp"
-            android:backgroundTint="@color/detailsLight"
+            android:backgroundTint="@color/primaryLight"
             android:text="all"
             android:textColor="@color/black" />
 
         <Button
             android:id="@+id/highProtein"
-            android:layout_width="90dp"
-            android:layout_height="53dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="5dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/detailsLight"
+            android:backgroundTint="@color/primaryLight"
             android:text="High-protein"
             android:textColor="@color/black" />
 
         <Button
             android:id="@+id/highFiber"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
             android:layout_weight= "1"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="20dp"
-            android:backgroundTint="@color/detailsLight"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="5dp"
+            android:backgroundTint="@color/primaryLight"
             android:text="High-fiber"
             android:textColor="@color/black" />
 
-</LinearLayout>
+                <Button
+                    android:id="@+id/balanced"
+                    android:layout_width="150dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/primaryLight"
+                    android:text="Balanced"
+                    android:textColor="@color/black"
+                    app:rippleColor="#00FFFFFF" />
 
-<LinearLayout
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:orientation="horizontal">
+        <Button
+            android:id="@+id/lowCarb"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/primaryLight"
+            android:text="Low-carb"
+            android:textColor="@color/black" />
 
-    <Button
-        android:id="@+id/balanced"
-        android:layout_width="62dp"
-        android:layout_height="match_parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"
+        <Button
+            android:id="@+id/lowFat"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/primaryLight"
+            android:text="Low-fat"
+            android:textColor="@color/black" />
 
-        android:layout_marginEnd="5dp"
-        android:layout_weight="1"
-        android:backgroundTint="@color/detailsLight"
-        android:text="Balanced"
-        android:textColor="@color/black" />
+            </LinearLayout>
 
-    <Button
-        android:id="@+id/lowCarb"
-        android:layout_width="71dp"
-        android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_weight="1"
-        android:backgroundTint="@color/detailsLight"
-        android:text="Low-carb"
-        android:textColor="@color/black" />
-
-    <Button
-        android:id="@+id/lowFat"
-        android:layout_width="109dp"
-        android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="20dp"
-        android:layout_weight="1"
-        android:backgroundTint="@color/detailsLight"
-        android:text="Low-fat"
-        android:textColor="@color/black" />
+        </HorizontalScrollView>
 
 </LinearLayout>
 

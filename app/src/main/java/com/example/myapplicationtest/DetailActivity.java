@@ -93,10 +93,11 @@ public class DetailActivity extends AppCompatActivity {
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent shareIntent= new Intent(Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, imageUrl);
-                startActivity(Intent.createChooser(shareIntent, "Share link"));
+                Intent intent= new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT, "Bekijk dit recept!");
+                intent.setType("text/plain");
+                startActivity(intent);
             }
         });
 
@@ -104,7 +105,7 @@ public class DetailActivity extends AppCompatActivity {
         btnSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String s= textViewCreator.getText().toString();
+                String s= textViewIngredient.getText().toString();
                 int speech= mTextToSpeech.speak(s, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
