@@ -22,12 +22,6 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     private OnItemClickListener mListener;
     private Object ArrayList;
 
-    //niet zeker
-    public void filterList(ArrayList<ExampleItem> filteredList){
-        ArrayList= filteredList;
-        notifyDataSetChanged();
-    }
-
     public interface  OnItemClickListener{
         void onItemClick(int position);
     }
@@ -36,7 +30,6 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         mListener= listener;
     }
 
-    //items doorgeven aan de adapter
     public ExampleAdapter(Context context, ArrayList<ExampleItem> exampleList) {
         mContext = context;
         mExampleList = exampleList;
@@ -59,7 +52,6 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         holder.mTextViewGerecht.setText(gerechtName);
         holder.mTextViewCalorieen.setText("Calorieën: " + calorieCount);
 
-
         Picasso.with(mContext).load(imageUrl).fit().centerInside().into(holder.mImageView);
     }
 
@@ -72,8 +64,6 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         public ImageView mImageView;
         public TextView mTextViewGerecht;
         public TextView mTextViewCalorieen;
-        //  public TextView mTextViewIngredient;
-        //  public TextView mTextViewBereiding;
 
         public ExampleViewHolder(View itemView) {
             super(itemView);

@@ -9,15 +9,12 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.speech.tts.TextToSpeech;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -47,19 +44,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        ingredientList=(TextView) findViewById(R.id.text_view_ingredientsTitel_detail);
-        b1=(Button)findViewById(R.id.speechButton);
-
-        Intent intent= getIntent();
-        String imageUrl= intent.getStringExtra(EXTRA_URL);
-        String gerechtName= intent.getStringExtra(EXTRA_GERECHT);
-        int calorieCount= intent.getIntExtra(EXTRA_CALORIEEN, 0);
-
-        String ingredients= intent.getStringExtra(EXTRA_INGREDIENTS);
-        String[] splicedIngredient = ingredients.replaceAll("\",", "\n").replaceAll("]", " ").replaceAll("\\[", "").replaceAll("\"", "\n").split(",");        // String bereiding= intent.getStringExtra(EXTRA_BEREIDING);
-
         getSupportActionBar().setTitle("Go back");
-
         ActionBar actionBar= getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -67,37 +52,22 @@ public class DetailActivity extends AppCompatActivity {
         TextView textViewGerecht= findViewById(R.id.text_view_gerecht_detail);
         TextView textViewCalorieen= findViewById(R.id.text_view_calorieen_detail);
         Button share= findViewById(R.id.shareButton);
-
-        b1=findViewById(R.id.speechButton);
-
-        t1= new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if(status == TextToSpeech.SUCCESS){
-                    int lang= t1.setLanguage(Locale.US);
-
-                    if (lang == TextToSpeech.LANG_MISSING_DATA || lang == TextToSpeech.LANG_NOT_SUPPORTED){
-                        Toast.makeText(DetailActivity.this, "Language not supported", Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(DetailActivity.this, "Language supported", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        });
-
-
         TextView textViewIngredient= findViewById(R.id.text_view_ingredients_detail);
 
-        Picasso.with(this).load(imageUrl).fit().centerInside().into(imageView);
-        textViewGerecht.setText(gerechtName);
-        textViewCalorieen.setText("Calorieën: " + calorieCount);
+        Intent intent= getIntent();
+        String imageUrl= intent.getStringExtra(EXTRA_URL);
+        String gerechtName= intent.getStringExtra(EXTRA_GERECHT);
+        int calorieCount= intent.getIntExtra(EXTRA_CALORIEEN, 0);
+        String ingredients= intent.getStringExtra(EXTRA_INGREDIENTS);
 
+        String[] splicedIngredient = ingredients.replaceAll("\",", "\n").replaceAll("]", " ").replaceAll("\\[", "").replaceAll("\"", "\n").split(",");        // String bereiding= intent.getStringExtra(EXTRA_BEREIDING);
         for(int i=0; i < splicedIngredient.length; i++){
             textViewIngredient.append(splicedIngredient[i]);
         }
 
-        //textViewIngredient.setText(ingredients);
-        //textViewBereidingUrl.setText(bereiding);
+        Picasso.with(this).load(imageUrl).fit().centerInside().into(imageView);
+        textViewGerecht.setText(gerechtName);
+        textViewCalorieen.setText("Calorieën: " + calorieCount);
 
         share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,14 +79,5 @@ public class DetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String data= ingredientList.getText().toString();
-                t1.speak(data, TextToSpeech.QUEUE_FLUSH, null);
-            }
-        });
-
     }
 }

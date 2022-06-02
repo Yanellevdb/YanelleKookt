@@ -139,8 +139,6 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
                 parseJSON(query, sortAll);
             }
         });
-
-
     }
 
     private void parseJSON(String query, String query2){
@@ -148,7 +146,6 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
 
         mExampleList.clear();
 
-        //Krijg je object terug (tussen curly braces) of array?
         JsonObjectRequest request= new JsonObjectRequest
                 (Request.Method.GET, url, null,
                         new Response.Listener<JSONObject>() {
@@ -165,17 +162,15 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
                                         int calorieCount= recipe.getInt("calories");
                                         String ingredients= recipe.getString("ingredientLines");
                                         String diet= recipe.getString("dietLabels");
-                                        //JSONObject bereidingUrl= recipe.getJSONObject("totalNutrients");
 
-                                        mExampleList.add(new ExampleItem(imageUrl, gerechtName, calorieCount, ingredients)); //hier voegen we het toe aan de lijst
+                                        mExampleList.add(new ExampleItem(imageUrl, gerechtName, calorieCount, ingredients));
                                     }
 
-                                    mExampleAdapter= new ExampleAdapter(MainActivity.this, mExampleList); //we geven het door aan de adapter
-                                    mRecyclerView.setAdapter(mExampleAdapter); //we koppelen de adapter aan de recycleview
+                                    mExampleAdapter= new ExampleAdapter(MainActivity.this, mExampleList);
+                                    mRecyclerView.setAdapter(mExampleAdapter);
                                     mExampleAdapter.setOnItemClickListener(MainActivity.this);
 
                                     mExampleAdapter.notifyDataSetChanged();
-
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -191,9 +186,6 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
         mRequestQueue.add(request);
     }
 
-    //hier gaan we een onclick uitvoeren, die gelinkt wordt met die van de adapter
-    //ze geven eigenlijk de 'positie' door en dit zegt eigenlijk op welk item er werd geklikt
-    //via detailIntent gaan we de info doorspelen naar de detailpagina
     @Override
     public void onItemClick(int position) {
         Intent detailIntent= new Intent(this, DetailActivity.class);
@@ -203,7 +195,6 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
         detailIntent.putExtra(EXTRA_GERECHT, clickedItem.getGerecht());
         detailIntent.putExtra(EXTRA_CALORIEEN, clickedItem.getCalorieCount());
         detailIntent.putExtra(EXTRA_INGREDIENTS, clickedItem.getIngredients());
-        // detailIntent.putExtra(EXTRA_BEREIDING, (Parcelable) clickedItem.getBereiding());
 
         startActivity(detailIntent);
     }

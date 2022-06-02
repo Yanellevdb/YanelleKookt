@@ -1,7 +1,5 @@
 package com.example.myapplicationtest;
 
-import org.json.JSONObject;
-
 public class ExampleItem {
     private String mImageUrl;
     private String mGerecht;
@@ -15,7 +13,6 @@ public class ExampleItem {
         mIngredients= ingredients;
     }
 
-    //hiermee kunnen we de waarde ophalen wanneer we deze methodes zouden toepassen
     public String getImageUrl() {
         return mImageUrl;
     }
