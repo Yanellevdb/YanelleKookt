@@ -49,7 +49,7 @@ public class DetailActivity extends AppCompatActivity {
         int calorieCount= intent.getIntExtra(EXTRA_CALORIEEN, 0);
 
         String ingredients= intent.getStringExtra(EXTRA_INGREDIENTS);
-        String[] splicedIngredient= ingredients.replaceAll("]", " ").replaceAll("\"", " ").replaceAll("\\[", " ").replaceAll("\"", "\n").split(",");
+        String[] splicedIngredient = ingredients.replaceAll("\",", "\n").replaceAll("]", " ").replaceAll("\\[", "").replaceAll("\"", "\n").split(",");
 
         getSupportActionBar().setTitle("Go back");
 
