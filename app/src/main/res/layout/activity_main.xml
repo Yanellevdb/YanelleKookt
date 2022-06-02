@@ -49,6 +49,14 @@
 
     </LinearLayout>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Find ingrediënts based on location"
+        android:layout_marginVertical="15dp"
+        android:layout_marginHorizontal="10dp"
+        android:id="@+id/geolocationButton"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

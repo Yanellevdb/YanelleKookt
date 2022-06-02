@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
     //via detailIntent gaan we de info doorspelen naar de detailpagina
     @Override
     public void onItemClick(int position) {
-        Intent detailIntent= new Intent(this, DetailActivity.class);
+        Intent detailIntent= new Intent(this, DetailActivity.class); //expliciete intent want we geven expliciet aan dat we naar detailacitivty willen
         ExampleItem clickedItem= mExampleList.get(position);
 
         detailIntent.putExtra(EXTRA_URL, clickedItem.getImageUrl());
