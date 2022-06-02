@@ -28,9 +28,9 @@ import java.util.Locale;
 
 public class DetailActivity extends AppCompatActivity {
 
-    private Button mBtnSpeak;
-    private EditText mTextEnter;
-    private TextToSpeech mTextToSpeech;
+    TextToSpeech t1;
+    EditText ed1;
+    Button b1;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
@@ -46,6 +46,9 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+//        ed1=(EditText)findViewById(R.id.editText);
+        b1=(Button)findViewById(R.id.speakButton);
 
         Intent intent= getIntent();
         String imageUrl= intent.getStringExtra(EXTRA_URL);
@@ -67,12 +70,20 @@ public class DetailActivity extends AppCompatActivity {
         Button share= findViewById(R.id.shareButton);
         Button btnSpeak=findViewById(R.id.speakButton);
 
-        mTextToSpeech= new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+        t1= new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
-            public void onInit(int i) {
-                if(i == TextToSpeech.SUCCESS){
-                    int result= mTextToSpeech.setLanguage(Locale.ENGLISH);
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR){
+                    t1.setLanguage(Locale.UK);
                 }
+            }
+        });
+
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String toSpeak= textViewGerecht.getText().toString();
+                int speech= t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
 
@@ -101,13 +112,5 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-
-        btnSpeak.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String s= textViewIngredient.getText().toString();
-                int speech= mTextToSpeech.speak(s, TextToSpeech.QUEUE_FLUSH, null);
-            }
-        });
     }
 }
