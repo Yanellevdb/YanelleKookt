@@ -30,6 +30,7 @@ public class DetailActivity extends AppCompatActivity {
 
     TextToSpeech t1;
     Button b1;
+    TextView ingredientList;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
@@ -46,7 +47,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-//        ed1=(EditText)findViewById(R.id.editText);
+        ingredientList=(TextView) findViewById(R.id.text_view_ingredientsTitel_detail);
         b1=(Button)findViewById(R.id.speechButton);
 
         Intent intent= getIntent();
@@ -84,13 +85,6 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String data= textViewGerecht.getText().toString();
-                t1.speak(data, TextToSpeech.QUEUE_FLUSH, null);
-            }
-        });
 
         TextView textViewIngredient= findViewById(R.id.text_view_ingredients_detail);
 
@@ -113,6 +107,14 @@ public class DetailActivity extends AppCompatActivity {
                 intent.putExtra(Intent.EXTRA_TEXT, "Bekijk dit recept!");
                 intent.setType("text/plain");
                 startActivity(intent);
+            }
+        });
+
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String data= ingredientList.getText().toString();
+                t1.speak(data, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
 
