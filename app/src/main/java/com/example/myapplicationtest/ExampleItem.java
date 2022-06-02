@@ -7,15 +7,15 @@ public class ExampleItem {
     private String mGerecht;
     private int mCalorieen;
     private String mIngredients;
-   // private JSONObject mIngredient;
-  //  private JSONObject mBereidingUrl;
+    // private JSONObject mIngredient;
+    //  private JSONObject mBereidingUrl;
 
     public ExampleItem(String imageUrl, String gerecht, int calorieen, String ingredients) {
         mImageUrl = imageUrl;
         mGerecht = gerecht;
         mCalorieen = calorieen;
         mIngredients= ingredients;
-       // mBereidingUrl= bereiding;
+        // mBereidingUrl= bereiding;
     }
 
     //hiermee kunnen we de waarde ophalen wanneer we deze methodes zouden toepassen

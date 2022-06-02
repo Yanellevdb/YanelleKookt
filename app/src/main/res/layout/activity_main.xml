@@ -8,74 +8,56 @@
     android:background="@drawable/gradient"
     android:orientation="vertical">
 
-        <LinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-            android:layout_gravity="center_vertical">
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal">
 
-            <EditText
-                android:id="@+id/queryInputText"
-                android:layout_width="219dp"
-                android:layout_height="55dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginHorizontal="5dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/border_shadow"
-                android:backgroundTint="@color/detailsLight"
-                android:inputType="text"
-                android:paddingLeft="10dp"
-                android:text="Zoek recepten"
-                android:textSize="20sp" />
+        <EditText
+            android:id="@+id/queryInputText"
+            android:layout_width="219dp"
+            android:layout_height="55dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/border_shadow"
+            android:backgroundTint="@color/detailsLight"
+            android:inputType="text"
+            android:paddingLeft="10dp"
+            android:text="Zoek recepten"
+            android:textSize="20sp" />
 
-            <Button
-                android:id="@+id/searchButton"
-                style="@style/Widget.MaterialComponents.Button.Icon"
-                android:layout_width="135dp"
-                android:layout_height="55dp"
-                android:layout_alignEnd="@id/queryInputText"
-                android:layout_centerHorizontal="true"
-                android:layout_marginHorizontal="5dp"
-                android:layout_marginTop="20dp"
-                android:backgroundTint="@color/blue"
-                android:padding="2dp"
-                android:text="Zoek"
-                android:textColor="#ffffff"
-                android:textColorHighlight="@color/primary"
-                android:textSize="20sp"
-                app:cornerRadius="10px"
-                app:icon="@android:drawable/ic_menu_search"
-                app:iconTint="@color/primaryLight" />
+        <Button
+            android:id="@+id/searchButton"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="135dp"
+            android:layout_height="55dp"
+            android:layout_alignEnd="@id/queryInputText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/blue"
+            android:padding="2dp"
+            android:text="Zoek"
+            android:textColor="#ffffff"
+            android:textColorHighlight="@color/primary"
+            android:textSize="20sp"
+            app:cornerRadius="10px"
+            app:icon="@android:drawable/ic_menu_search"
+            app:iconTint="@color/primaryLight" />
 
     </LinearLayout>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Find ingrediënts based on location"
-        android:layout_marginVertical="15dp"
-        android:layout_marginHorizontal="10dp"
-        android:id="@+id/geolocationButton"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Latitude"
-        android:id="@+id/latitude"
-        android:textSize="15dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Longitude"
-        android:id="@+id/longitude"
-        android:textSize="15dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"
-        />
+        android:text="Find recipes based on location"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/blue"
+        android:id="@+id/locationBtn"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -101,39 +83,39 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="15dp">
 
-            <Button
-            android:id="@+id/sortAll"
-            android:layout_width="100dp"
-            android:layout_height="70dp"
-            android:layout_weight= "1"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="5dp"
-            android:backgroundTint="@color/primaryLight"
-            android:text="all"
-            android:textColor="@color/black" />
+                <Button
+                    android:id="@+id/sortAll"
+                    android:layout_width="100dp"
+                    android:layout_height="70dp"
+                    android:layout_weight= "1"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="5dp"
+                    android:backgroundTint="@color/primaryLight"
+                    android:text="all"
+                    android:textColor="@color/black" />
 
-        <Button
-            android:id="@+id/highProtein"
-            android:layout_width="150dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/primaryLight"
-            android:text="High-protein"
-            android:textColor="@color/black" />
+                <Button
+                    android:id="@+id/highProtein"
+                    android:layout_width="150dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/primaryLight"
+                    android:text="High-protein"
+                    android:textColor="@color/black" />
 
-        <Button
-            android:id="@+id/highFiber"
-            android:layout_width="150dp"
-            android:layout_height="70dp"
-            android:layout_weight= "1"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="5dp"
-            android:backgroundTint="@color/primaryLight"
-            android:text="High-fiber"
-            android:textColor="@color/black" />
+                <Button
+                    android:id="@+id/highFiber"
+                    android:layout_width="150dp"
+                    android:layout_height="70dp"
+                    android:layout_weight= "1"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="5dp"
+                    android:backgroundTint="@color/primaryLight"
+                    android:text="High-fiber"
+                    android:textColor="@color/black" />
 
                 <Button
                     android:id="@+id/balanced"
@@ -147,33 +129,33 @@
                     android:textColor="@color/black"
                     app:rippleColor="#00FFFFFF" />
 
-        <Button
-            android:id="@+id/lowCarb"
-            android:layout_width="150dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/primaryLight"
-            android:text="Low-carb"
-            android:textColor="@color/black" />
+                <Button
+                    android:id="@+id/lowCarb"
+                    android:layout_width="150dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/primaryLight"
+                    android:text="Low-carb"
+                    android:textColor="@color/black" />
 
-        <Button
-            android:id="@+id/lowFat"
-            android:layout_width="150dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="20dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/primaryLight"
-            android:text="Low-fat"
-            android:textColor="@color/black" />
+                <Button
+                    android:id="@+id/lowFat"
+                    android:layout_width="150dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/primaryLight"
+                    android:text="Low-fat"
+                    android:textColor="@color/black" />
 
             </LinearLayout>
 
         </HorizontalScrollView>
 
-</LinearLayout>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"

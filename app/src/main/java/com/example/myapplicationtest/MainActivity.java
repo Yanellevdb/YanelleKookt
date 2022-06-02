@@ -1,23 +1,14 @@
 package com.example.myapplicationtest;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -37,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
     public static final String EXTRA_GERECHT= "gerechtName";
     public static final String EXTRA_CALORIEEN= "calorieCount";
     public static final String EXTRA_INGREDIENTS= "ingredients";
+    // public static final String EXTRA_BEREIDING= "bereidingsUrl";
 
     private RecyclerView mRecyclerView;
     private ExampleAdapter mExampleAdapter;
@@ -46,16 +38,11 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
     private EditText mEdit;
     private static String DEFAULT_QUERY= "chicken";
 
-    private TextView textViewLatitude, textViewLongitude;
-    private LocationManager locationManager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        getSupportActionBar().setTitle("Yanelle kookt");
 
         mEdit= findViewById(R.id.queryInputText);
         mEdit.setText(DEFAULT_QUERY);
@@ -72,30 +59,22 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
         mRequestQueue= Volley.newRequestQueue(this);
         parseJSON(DEFAULT_QUERY, "");
 
+        getSupportActionBar().setTitle("Yanelle kookt");
+
         //location
-        textViewLatitude= findViewById(R.id.latitude);
-        textViewLongitude= findViewById(R.id.longitude);
-        locationManager= (LocationManager) getSystemService(LOCATION_SERVICE);
-
-        //check location permission
-        if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
-            &&
-            ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},1);
-        }
-
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10, 1, new LocationListener() {
+        Button locationBtn= findViewById(R.id.locationBtn);
+        locationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onLocationChanged(@NonNull Location location) {
-                textViewLatitude.setText(String.valueOf(location.getLatitude()));
-                textViewLongitude.setText(String.valueOf(location.getLongitude()));
+            public void onClick(View view) {
+                String query= "e";
+                String sortAll="&cuisineType=Central%20Europe";
+                parseJSON(query, sortAll);
             }
         });
 
         //filters
         Button sortLowFat= findViewById(R.id.lowFat);
-        sortLowFat.setOnClickListener(new View.OnClickListener() {
+        sortLowFat.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 String query= "e";
@@ -175,42 +154,42 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
         //Krijg je object terug (tussen curly braces) of array?
         JsonObjectRequest request= new JsonObjectRequest
                 (Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONArray jsonArray= response.getJSONArray("hits");
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                try {
+                                    JSONArray jsonArray= response.getJSONArray("hits");
 
-                    for(int i=0; i < jsonArray.length(); i++){
-                        JSONObject recipe= jsonArray.getJSONObject(i).getJSONObject("recipe");
+                                    for(int i=0; i < jsonArray.length(); i++){
+                                        JSONObject recipe= jsonArray.getJSONObject(i).getJSONObject("recipe");
 
-                        String gerechtName= recipe.getString("label");
-                        String imageUrl= recipe.getString("image");
-                        int calorieCount= recipe.getInt("calories");
-                        String ingredients= recipe.getString("ingredientLines");
-                        String diet= recipe.getString("dietLabels");
-                        //JSONObject bereidingUrl= recipe.getJSONObject("totalNutrients");
+                                        String gerechtName= recipe.getString("label");
+                                        String imageUrl= recipe.getString("image");
+                                        int calorieCount= recipe.getInt("calories");
+                                        String ingredients= recipe.getString("ingredientLines");
+                                        String diet= recipe.getString("dietLabels");
+                                        //JSONObject bereidingUrl= recipe.getJSONObject("totalNutrients");
 
-                        mExampleList.add(new ExampleItem(imageUrl, gerechtName, calorieCount, ingredients)); //hier voegen we het toe aan de lijst
+                                        mExampleList.add(new ExampleItem(imageUrl, gerechtName, calorieCount, ingredients)); //hier voegen we het toe aan de lijst
+                                    }
+
+                                    mExampleAdapter= new ExampleAdapter(MainActivity.this, mExampleList); //we geven het door aan de adapter
+                                    mRecyclerView.setAdapter(mExampleAdapter); //we koppelen de adapter aan de recycleview
+                                    mExampleAdapter.setOnItemClickListener(MainActivity.this);
+
+                                    mExampleAdapter.notifyDataSetChanged();
+
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
                     }
-
-                    mExampleAdapter= new ExampleAdapter(MainActivity.this, mExampleList); //we geven het door aan de adapter
-                    mRecyclerView.setAdapter(mExampleAdapter); //we koppelen de adapter aan de recycleview
-                    mExampleAdapter.setOnItemClickListener(MainActivity.this);
-
-                    mExampleAdapter.notifyDataSetChanged();
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
+                });
 
         mRequestQueue.add(request);
     }
@@ -220,14 +199,14 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
     //via detailIntent gaan we de info doorspelen naar de detailpagina
     @Override
     public void onItemClick(int position) {
-        Intent detailIntent= new Intent(this, DetailActivity.class); //expliciete intent want we geven expliciet aan dat we naar detailacitivty willen
+        Intent detailIntent= new Intent(this, DetailActivity.class);
         ExampleItem clickedItem= mExampleList.get(position);
 
         detailIntent.putExtra(EXTRA_URL, clickedItem.getImageUrl());
         detailIntent.putExtra(EXTRA_GERECHT, clickedItem.getGerecht());
         detailIntent.putExtra(EXTRA_CALORIEEN, clickedItem.getCalorieCount());
         detailIntent.putExtra(EXTRA_INGREDIENTS, clickedItem.getIngredients());
-       // detailIntent.putExtra(EXTRA_BEREIDING, (Parcelable) clickedItem.getBereiding());
+        // detailIntent.putExtra(EXTRA_BEREIDING, (Parcelable) clickedItem.getBereiding());
 
         startActivity(detailIntent);
     }

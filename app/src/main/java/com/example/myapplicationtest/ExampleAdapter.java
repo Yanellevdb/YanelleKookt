@@ -72,8 +72,8 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         public ImageView mImageView;
         public TextView mTextViewGerecht;
         public TextView mTextViewCalorieen;
-      //  public TextView mTextViewIngredient;
-      //  public TextView mTextViewBereiding;
+        //  public TextView mTextViewIngredient;
+        //  public TextView mTextViewBereiding;
 
         public ExampleViewHolder(View itemView) {
             super(itemView);
