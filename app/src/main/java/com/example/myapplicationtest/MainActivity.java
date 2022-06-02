@@ -1,14 +1,23 @@
 package com.example.myapplicationtest;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
     public static final String EXTRA_GERECHT= "gerechtName";
     public static final String EXTRA_CALORIEEN= "calorieCount";
     public static final String EXTRA_INGREDIENTS= "ingredients";
-   // public static final String EXTRA_BEREIDING= "bereidingsUrl";
 
     private RecyclerView mRecyclerView;
     private ExampleAdapter mExampleAdapter;
@@ -38,11 +46,16 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
     private EditText mEdit;
     private static String DEFAULT_QUERY= "chicken";
 
+    private TextView textViewLatitude, textViewLongitude;
+    private LocationManager locationManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getSupportActionBar().setTitle("Yanelle kookt");
 
         mEdit= findViewById(R.id.queryInputText);
         mEdit.setText(DEFAULT_QUERY);
@@ -59,7 +72,26 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
         mRequestQueue= Volley.newRequestQueue(this);
         parseJSON(DEFAULT_QUERY, "");
 
-        getSupportActionBar().setTitle("Yanelle kookt");
+        //location
+        textViewLatitude= findViewById(R.id.latitude);
+        textViewLongitude= findViewById(R.id.longitude);
+        locationManager= (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        //check location permission
+        if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            &&
+            ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},1);
+        }
+
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10, 1, new LocationListener() {
+            @Override
+            public void onLocationChanged(@NonNull Location location) {
+                textViewLatitude.setText(String.valueOf(location.getLatitude()));
+                textViewLongitude.setText(String.valueOf(location.getLongitude()));
+            }
+        });
 
         //filters
         Button sortLowFat= findViewById(R.id.lowFat);
