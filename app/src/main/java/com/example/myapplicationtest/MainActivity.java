@@ -25,8 +25,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements ExampleAdapter.OnItemClickListener {
     public static final String EXTRA_URL= "imageUrl";
-    public static final String EXTRA_CREATOR= "creatorName";
-    public static final String EXTRA_LIKES= "likeCount";
+    public static final String EXTRA_GERECHT= "gerechtName";
+    public static final String EXTRA_CALORIEEN= "calorieCount";
     public static final String EXTRA_INGREDIENTS= "ingredients";
    // public static final String EXTRA_BEREIDING= "bereidingsUrl";
 
@@ -152,14 +152,14 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
                     for(int i=0; i < jsonArray.length(); i++){
                         JSONObject recipe= jsonArray.getJSONObject(i).getJSONObject("recipe");
 
-                        String creatorName= recipe.getString("label");
+                        String gerechtName= recipe.getString("label");
                         String imageUrl= recipe.getString("image");
-                        int likeCount= recipe.getInt("calories");
+                        int calorieCount= recipe.getInt("calories");
                         String ingredients= recipe.getString("ingredientLines");
                         String diet= recipe.getString("dietLabels");
                         //JSONObject bereidingUrl= recipe.getJSONObject("totalNutrients");
 
-                        mExampleList.add(new ExampleItem(imageUrl, creatorName, likeCount, ingredients)); //hier voegen we het toe aan de lijst
+                        mExampleList.add(new ExampleItem(imageUrl, gerechtName, calorieCount, ingredients)); //hier voegen we het toe aan de lijst
                     }
 
                     mExampleAdapter= new ExampleAdapter(MainActivity.this, mExampleList); //we geven het door aan de adapter
@@ -192,8 +192,8 @@ public class MainActivity extends AppCompatActivity implements ExampleAdapter.On
         ExampleItem clickedItem= mExampleList.get(position);
 
         detailIntent.putExtra(EXTRA_URL, clickedItem.getImageUrl());
-        detailIntent.putExtra(EXTRA_CREATOR, clickedItem.getCreator());
-        detailIntent.putExtra(EXTRA_LIKES, clickedItem.getLikeCount());
+        detailIntent.putExtra(EXTRA_GERECHT, clickedItem.getGerecht());
+        detailIntent.putExtra(EXTRA_CALORIEEN, clickedItem.getCalorieCount());
         detailIntent.putExtra(EXTRA_INGREDIENTS, clickedItem.getIngredients());
        // detailIntent.putExtra(EXTRA_BEREIDING, (Parcelable) clickedItem.getBereiding());
 

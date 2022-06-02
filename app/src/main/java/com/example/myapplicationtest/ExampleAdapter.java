@@ -53,15 +53,12 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         ExampleItem currentItem= mExampleList.get(position);
 
         String imageUrl= currentItem.getImageUrl();
-        String creatorName= currentItem.getCreator();
-        int likeCount= currentItem.getLikeCount();
-      //  JSONObject ingredient= currentItem.getIngredients();
-      //  JSONObject bereidingsUrl= currentItem.getBereiding();
+        String gerechtName= currentItem.getGerecht();
+        int calorieCount= currentItem.getCalorieCount();
 
-        holder.mTextViewCreator.setText(creatorName);
-        holder.mTextViewLikes.setText("Calorieën: " + likeCount);
-      //  holder.mTextViewIngredient.setText((CharSequence) ingredient);
-      //  holder.mTextViewBereiding.setText((CharSequence) bereidingsUrl);
+        holder.mTextViewGerecht.setText(gerechtName);
+        holder.mTextViewCalorieen.setText("Calorieën: " + calorieCount);
+
 
         Picasso.with(mContext).load(imageUrl).fit().centerInside().into(holder.mImageView);
     }
@@ -73,18 +70,16 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
 
     public class ExampleViewHolder extends RecyclerView.ViewHolder{
         public ImageView mImageView;
-        public TextView mTextViewCreator;
-        public TextView mTextViewLikes;
+        public TextView mTextViewGerecht;
+        public TextView mTextViewCalorieen;
       //  public TextView mTextViewIngredient;
       //  public TextView mTextViewBereiding;
 
         public ExampleViewHolder(View itemView) {
             super(itemView);
             mImageView = itemView.findViewById(R.id.image_view);
-            mTextViewCreator = itemView.findViewById(R.id.text_view_creator);
-            mTextViewLikes = itemView.findViewById(R.id.text_view_likes);
-        //    mTextViewIngredient= itemView.findViewById(R.id.text_view_ingredients_detail);
-        //    mTextViewBereiding= itemView.findViewById(R.id.text_view_bereiding_detail);
+            mTextViewGerecht = itemView.findViewById(R.id.text_view_gerecht);
+            mTextViewCalorieen = itemView.findViewById(R.id.text_view_calorieen);
 
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override

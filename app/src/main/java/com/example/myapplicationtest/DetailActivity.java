@@ -1,9 +1,9 @@
 package com.example.myapplicationtest;
 
 //import static com.example.myapplicationtest.MainActivity.EXTRA_BEREIDING;
-import static com.example.myapplicationtest.MainActivity.EXTRA_CREATOR;
+import static com.example.myapplicationtest.MainActivity.EXTRA_GERECHT;
 import static com.example.myapplicationtest.MainActivity.EXTRA_INGREDIENTS;
-import static com.example.myapplicationtest.MainActivity.EXTRA_LIKES;
+import static com.example.myapplicationtest.MainActivity.EXTRA_CALORIEEN;
 import static com.example.myapplicationtest.MainActivity.EXTRA_URL;
 
 import androidx.appcompat.app.ActionBar;
@@ -49,8 +49,8 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent intent= getIntent();
         String imageUrl= intent.getStringExtra(EXTRA_URL);
-        String creatorName= intent.getStringExtra(EXTRA_CREATOR);
-        int likeCount= intent.getIntExtra(EXTRA_LIKES, 0);
+        String gerechtName= intent.getStringExtra(EXTRA_GERECHT);
+        int calorieCount= intent.getIntExtra(EXTRA_CALORIEEN, 0);
 
         String ingredients= intent.getStringExtra(EXTRA_INGREDIENTS);
         String[] splicedIngredient= ingredients.replaceAll("]", " ").replaceAll("\"", " ").replaceAll("\\[", " ").replaceAll("\"", "\n").split(",");
@@ -62,8 +62,8 @@ public class DetailActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         ImageView imageView= findViewById(R.id.image_view_detail);
-        TextView textViewCreator= findViewById(R.id.text_view_creator_detail);
-        TextView textViewLikes= findViewById(R.id.text_view_like_detail);
+        TextView textViewGerecht= findViewById(R.id.text_view_gerecht_detail);
+        TextView textViewCalorieen= findViewById(R.id.text_view_calorieen_detail);
         Button share= findViewById(R.id.shareButton);
         Button btnSpeak=findViewById(R.id.speakButton);
 
@@ -80,8 +80,8 @@ public class DetailActivity extends AppCompatActivity {
        // TextView textViewBereidingUrl= findViewById(R.id.text_view_bereiding_detail);
 
         Picasso.with(this).load(imageUrl).fit().centerInside().into(imageView);
-        textViewCreator.setText(creatorName);
-        textViewLikes.setText("Calorieën: " + likeCount);
+        textViewGerecht.setText(gerechtName);
+        textViewCalorieen.setText("Calorieën: " + calorieCount);
 
         for(int i=0; i < splicedIngredient.length; i++){
             textViewIngredient.append(splicedIngredient[i]);

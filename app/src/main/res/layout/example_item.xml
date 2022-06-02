@@ -32,15 +32,15 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/text_view_creator"
+                android:id="@+id/text_view_gerecht"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Creator Name"
+                android:text="Gerecht Name"
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/text_view_likes"
+                android:id="@+id/text_view_calorieen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Calorieën: " />

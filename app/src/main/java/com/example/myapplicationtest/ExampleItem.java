@@ -4,16 +4,16 @@ import org.json.JSONObject;
 
 public class ExampleItem {
     private String mImageUrl;
-    private String mCreator;
-    private int mLikes;
+    private String mGerecht;
+    private int mCalorieen;
     private String mIngredients;
    // private JSONObject mIngredient;
   //  private JSONObject mBereidingUrl;
 
-    public ExampleItem(String imageUrl, String creator, int likes, String ingredients) {
+    public ExampleItem(String imageUrl, String gerecht, int calorieen, String ingredients) {
         mImageUrl = imageUrl;
-        mCreator = creator;
-        mLikes = likes;
+        mGerecht = gerecht;
+        mCalorieen = calorieen;
         mIngredients= ingredients;
        // mBereidingUrl= bereiding;
     }
@@ -23,12 +23,12 @@ public class ExampleItem {
         return mImageUrl;
     }
 
-    public String getCreator() {
-        return mCreator;
+    public String getGerecht() {
+        return mGerecht;
     }
 
-    public int getLikeCount() {
-        return mLikes;
+    public int getCalorieCount() {
+        return mCalorieen;
     }
 
     public String getIngredients() {
